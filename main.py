@@ -1,5 +1,7 @@
 import requests
-from config import API_WEATHER_TOKEN
+
+from config import API_WEATHER_TOKEN, TOKEN_BOT
+
 
 def get_weather(city: str, token: str):
     try:
@@ -16,6 +18,11 @@ def get_coordinates_by_name(city: str, token: str) -> tuple:
     try:
         request = requests.get(f"http://api.openweathermap.org/geo/1.0/direct?q={city}&appid={token}")
         data = request.json()
+        if not data:
+            print("Error in function get_coordinates_by_name: cannot get info about this city!\n")
+            return 
+        else:
+            data = data[0]
 
     except Exception as e:
         print(f"Error in function get_coordinates_by_name: [ {e} ]")
@@ -25,8 +32,10 @@ def get_coordinates_by_name(city: str, token: str) -> tuple:
 
 
 def main():
-    r = get_weather("London", API_WEATHER_TOKEN)
+    r = get_weather("санкт-петербург", API_WEATHER_TOKEN)
     print(r)
+    
 
-
-main()
+if __name__ == '__main__':
+    main()
+    
