@@ -22,13 +22,7 @@ async def send_weather(message, state):
         data = get_weather(city, API_WEATHER_TOKEN)
         temperature = round(data["main"]["temp"])
 
-        if 2 <= temperature % 10 <= 4:
-            end = 'а'
-        elif temperature % 10 == 1:
-            end = ''
-        else:
-            end = 'ов'
-        await message.answer(text=f"На данный момент в городе {city} температура составляет {temperature} градус{end}")
+        await message.answer(text=f"На данный момент в городе {city} температура составляет {temperature} °C")
     except Exception as err:
         print(err)
         await message.answer(text="Извините, мы не можем получить данные об этом городе!")
