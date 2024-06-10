@@ -9,9 +9,9 @@ from aiogram.fsm.state import StatesGroup, State
 from aiogram.methods import DeleteWebhook
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
-from dotenv import find_dotenv, load_dotenv
+from dotenv import load_dotenv
 
-load_dotenv(find_dotenv())
+load_dotenv()
 
 from bot_interaction import base
 from database.db import create_db
