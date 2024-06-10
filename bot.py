@@ -28,7 +28,7 @@ async def main():
     create_db()
     
     scheduler = AsyncIOScheduler()
-    scheduler.add_job(base.send_weather_to_all, 'cron', hour='10,12,14,16,18,20,22', minute='41')
+    scheduler.add_job(base.send_weather_to_all, 'cron', hour='10,12,14,16,18,20,22')
     scheduler.start()
 
     await bot(DeleteWebhook(drop_pending_updates=True))
