@@ -16,9 +16,19 @@ def add_user_info(info: dict):
     with open("db.json", "r+") as f:
         data = json.load(f)
         if (check_iser_exists(info["telegram_id"])):
-            print("User exists!")
             return
         data["users_data"].append(info)
+        f.seek(0)
+        json.dump(data, f, ensure_ascii=False)
+
+
+def update_user_info(info: dict):
+    with open("db.json", "r+") as f:
+        data = json.load(f)
+        for key in data["users_data"]:
+            if key["telegram_id"] == info["telegram_id"]:
+                key["city"] = info["city"]
+        f.truncate(0)
         f.seek(0)
         json.dump(data, f, ensure_ascii=False)
 

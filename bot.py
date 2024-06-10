@@ -1,5 +1,7 @@
 import asyncio
 import logging
+import os
+
 
 from aiogram import Bot, Dispatcher
 from aiogram.fsm.storage.memory import MemoryStorage
@@ -7,14 +9,19 @@ from aiogram.fsm.state import StatesGroup, State
 from aiogram.methods import DeleteWebhook
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
-from config import TOKEN_BOT
+from dotenv import find_dotenv, load_dotenv
+
+load_dotenv(find_dotenv())
+
 from bot_interaction import base
 from database.db import create_db
 
 class UserState(StatesGroup):
     city_choice = State()
+    interaction = State()
+    change_city = State()
 
-bot = Bot(token=TOKEN_BOT)
+bot = Bot(token=os.getenv("TOKEN_BOT"))
 
 
 
